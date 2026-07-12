@@ -7,7 +7,25 @@ set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 MEMORY_DIR="$(dirname "$SCRIPT_DIR")"
-VAULT="$(dirname "$MEMORY_DIR")"
+
+# Resolve vault path via config (same logic as session-context.sh)
+VAULT="$(node -e "
+const fs=require('fs'),p=require('path'),os=require('os');
+function getVault(){
+  if(process.env.SELF_WIKI_VAULT) return process.env.SELF_WIKI_VAULT;
+  if(process.env.MEMORY_VAULT_PATH) return process.env.MEMORY_VAULT_PATH;
+  try{const c=JSON.parse(fs.readFileSync(p.join(os.homedir(),'.self-wiki','config.json'),'utf8'));if(c.vault_path)return c.vault_path;}catch{}
+  try{for(const d of fs.readdirSync(os.homedir())){try{const c=JSON.parse(fs.readFileSync(p.join(os.homedir(),d,'.memory','config.json'),'utf8'));if(c.vault_path)return c.vault_path;}catch{}}}catch{}
+  return '';
+}
+console.log(getVault());
+" 2>/dev/null)"
+
+# Fallback: parent of self-wiki (legacy behavior)
+if [ -z "$VAULT" ]; then
+  VAULT="$(dirname "$MEMORY_DIR")"
+fi
+
 RAW_DIR="$VAULT/raw"
 LOGFILE="$MEMORY_DIR/last_hook.log"
 
