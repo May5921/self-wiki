@@ -5,14 +5,7 @@
 # ═══════════════════════════════════════════════════════
 set -uo pipefail
 
-# Use node for everything to avoid Git Bash /d/ path issues
-node -e "
-const fs = require('fs');
-const path = require('path');
-const v = require(path.join(process.env.HOME || '', '.claude', 'hooks', '_self-wiki-resolve.js'));
-" 2>/dev/null
-
-# Fallback: resolve vault via env or config directly
+# Resolve vault path via config
 VAULT="$(node -e "
 const fs=require('fs'),p=require('path'),os=require('os');
 function getVault(){
@@ -26,6 +19,7 @@ console.log(getVault());
 " 2>/dev/null)"
 
 if [ -z "$VAULT" ] || [ ! -d "$VAULT" ]; then
+  echo "[self-wiki] vault 未配置。运行: mkdir -p ~/.self-wiki && cp templates/config.json ~/.self-wiki/config.json && 编辑 vault_path"
   exit 0
 fi
 

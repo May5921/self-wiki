@@ -1,0 +1,16 @@
+{
+  "vault_path": "",
+  "api": {
+    "endpoint": "https://api.deepseek.com/v1/chat/completions",
+    "key": "sk-your-api-key-here",
+    "model": "deepseek-chat"
+  },
+  "thresholds": {
+    "promote_references": 3,
+    "demote_days": 30,
+    "expire_days": 180,
+    "max_claude_entries": 15,
+    "raw_archive_days": 30,
+    "raw_delete_days": 90
+  }
+}
