@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+*.log
+.tmp_*
+config.json
+*.tmp
+corrections.jsonl
+working/
+trash/
+.memory/

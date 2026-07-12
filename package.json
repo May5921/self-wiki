@@ -1,0 +1,24 @@
+{
+  "name": "self-wiki",
+  "version": "0.1.0",
+  "description": "Karpathy-style self-growing knowledge base for Claude Code",
+  "main": "bin/memory.js",
+  "bin": {
+    "self-wiki": "bin/memory.js"
+  },
+  "scripts": {
+    "test": "node bin/memory.js help"
+  },
+  "keywords": [
+    "claude",
+    "memory",
+    "knowledge",
+    "wiki",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

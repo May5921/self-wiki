@@ -1,0 +1,48 @@
+{
+  "name": "self-wiki",
+  "version": "0.1.0",
+  "description": "Karpathy-style self-growing knowledge base for Claude Code",
+  "main": "bin/memory.js",
+  "bin": {
+    "self-wiki": "bin/memory.js"
+  },
+  "mcp": {
+    "server": "mcp-server.js"
+  },
+  "skills": [
+    "skills/self-wiki.md"
+  ],
+  "commands": [
+    {
+      "name": "extract",
+      "description": "Extract knowledge from raw/ files",
+      "args": ["--all"]
+    },
+    {
+      "name": "search",
+      "description": "Search wiki knowledge (BM25)",
+      "args": ["<keywords>"]
+    },
+    {
+      "name": "index",
+      "description": "Rebuild wiki index"
+    },
+    {
+      "name": "lint",
+      "description": "Check knowledge base health"
+    },
+    {
+      "name": "weave",
+      "description": "Cross-link wiki pages"
+    },
+    {
+      "name": "heartbeat",
+      "description": "Daily maintenance routine"
+    },
+    {
+      "name": "feedback",
+      "description": "Mark a wiki page as useful|wrong|outdated",
+      "args": ["<file>", "<type>"]
+    }
+  ]
+}
