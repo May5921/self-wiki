@@ -29,8 +29,8 @@ git clone https://github.com/your-username/self-wiki.git
 cd self-wiki
 
 # 配置
-cp templates/config.json ~/.self-wiki/config.json
-# 编辑 ~/.self-wiki/config.json，填入你的 API key
+cp templates/config.example.json ~/.self-wiki/config.json
+# 编辑 ~/.self-wiki/config.json，填入 vault_path 和 API key
 
 # 使用
 self-wiki extract    # 提取知识
@@ -118,7 +118,7 @@ self-wiki/
 │   ├── hook-capture.sh    # Hook 捕获
 │   └── session-context.sh # 会话上下文
 ├── templates/
-│   └── config.json
+│   └── config.example.json
 ├── package.json
 ├── README.md
 └── LICENSE
