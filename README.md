@@ -79,7 +79,40 @@ claude mcp add self-wiki -- node mcp-server.js
 
 ### Layer 3: Hooks（全自动）
 
-会话结束自动提取，开始自动注入。
+在 `~/.claude/settings.json` 中添加：
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /path/to/self-wiki/scripts/session-context.sh",
+            "timeout": 5,
+            "statusMessage": "Loading knowledge..."
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /path/to/self-wiki/scripts/hook-capture.sh",
+            "timeout": 10,
+            "statusMessage": "Saving knowledge..."
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+将 `/path/to/self-wiki` 替换为你的实际安装路径。配置后每次开会话自动注入知识，结束时自动捕获。
 
 ## 成本
 
